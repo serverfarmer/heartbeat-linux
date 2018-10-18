@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 exec 9>/var/run/heartbeat.lock
 if ! flock -n 9; then exit 0; fi
@@ -18,4 +18,4 @@ else
 	url="https://serverfarmer.home.pl/heartbeat/"
 fi
 
-curl --connect-timeout 2 --retry 2 --retry-max-time 3 -s "$url?host=$host&services=$services" >/dev/null 2>/dev/null
+curl --connect-timeout 2 --retry 2 --retry-max-time 3 -s "$url?host=$host&services=${services:1}" >/dev/null 2>/dev/null
