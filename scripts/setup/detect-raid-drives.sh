@@ -11,7 +11,7 @@ scan_drive() {
 		model=`grep 'Product:' $file |awk '{ print $2 $3 $4 $5 $6 $7 $8 $9 }'`
 		serial=`grep 'Serial number:' $file |awk '{ print $3 }'`
 		echo sas:$device:$type:sas-${model}_${serial}
-	else
+	elif ! grep -q "INQUIRY failed" $file; then
 		model=`grep 'Device Model:' $file |awk '{ print $3 $4 $5 $6 $7 $8 $9 }'`
 		serial=`grep 'Serial Number:' $file |awk '{ print $3 }'`
 		echo sata:$device:$type:ata-${model}_${serial}
@@ -20,10 +20,12 @@ scan_drive() {
 
 
 file=`mktemp -u /var/cache/heartbeat/raid.XXXXXXXXX.tmp`
-handles=`/opt/heartbeat/scripts/facts/storage/list-megaraid-drives.sh`
+drives=`/opt/heartbeat/scripts/facts/storage/list-megaraid-drives.sh`
 
-for handle in $handles; do
-	scan_drive $file $handle /dev/bus/0
+for drive in $drives; do
+	handle=$(echo $drive |cut -d: -f1)
+	device=$(echo $drive |cut -d: -f2)
+	scan_drive $file $handle $device
 done
 
 drives=`/opt/heartbeat/scripts/facts/storage/list-scsi-generic-drives.sh`

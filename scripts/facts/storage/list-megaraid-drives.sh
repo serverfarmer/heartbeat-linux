@@ -1,3 +1,3 @@
 #!/bin/sh
 
-/usr/sbin/smartctl --scan |grep megaraid |cut -d' ' -f3
+/usr/sbin/smartctl --scan |grep megaraid |awk '{ print $3 ":" $1 }'
