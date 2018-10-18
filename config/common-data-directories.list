@@ -1,0 +1,16 @@
+/var/lib/docker
+/var/lib/lxc
+/var/lib/mongodb
+/var/lib/mysql
+/var/lib/postgresql
+/var/lib/rabbitmq
+/var/lib/redis
+
+/var/lib/couchbase
+/var/opt/couchbase
+/opt/couchbase
+
+/data/docker
+/data/mysql
+/data/postgres
+/data/postgresql
