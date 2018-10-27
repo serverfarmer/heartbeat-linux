@@ -1,6 +1,6 @@
-# Overview
+## Overview
 
-Heartbeat is a Server Farmer subproject, that extends functionally your chosen monitoring/alerting solution by providing abilities to monitor (as for Linux version):
+Heartbeat is a Server Farmer subproject, that extends functionally of your chosen monitoring/alerting solution by providing abilities to monitor (as for Linux version):
 - services listening on known ports
 - running Docker containers
 - running libvirt-based virtual machines
@@ -9,12 +9,12 @@ Heartbeat is a Server Farmer subproject, that extends functionally your chosen m
 - mounted LUKS encrypted drives (or just any device mapped based)
 - custom conditions defined per monitored host
 
-Heartbeat can work with any monitoring/alerting system, that supports http(s) keyword monitoring:
+Heartbeat can work with any monitoring/alerting system, that supports http(s) keyword monitoring, including:
 - public: StatusCake, Uptimerobot, Pingdom etc.
 - local: Nagios, Icinga, Zabbix, PRTG etc.
 
 
-# Installation
+## Installation
 
 Heartbeat can be installed in 2 modes: with or without Server Farmer.
 
@@ -33,7 +33,7 @@ git clone https://github.com/serverfarmer/heartbeat-linux /opt/heartbeat
 Next, put your Heartbeat instance url into `/etc/heartbeat/server.url` file (unless you want to use the public instance, eg. for testing).
 
 
-# How it works
+## How it works
 
 #### Local part:
 
@@ -54,10 +54,10 @@ Next, put your Heartbeat instance url into `/etc/heartbeat/server.url` file (unl
 
 Items are reported every 120 seconds, so 270 seconds means tolerance for 1 failed request + up to 30 seconds overall network lag. And this limit can be easily adjusted in repository with server part.
 
-#### URL format for querying:
+## Query URL format
 
 Assuming that:
-- your Heartbeat instance has address `http://heartbeat.yourdomain.com/heartbeat/`
+- your Heartbeat server has address `http://heartbeat.yourdomain.com/heartbeat/`
 - your example monitored host has hostname `yourserver.yourdomain.com`
 
 this is the complete URL that checks for `ssh` service running on this host:
@@ -71,14 +71,14 @@ Rules:
 - network service names are listed in `/opt/heartbeat/scripts/checks/services.sh` script
 
 
-# Performance
+## Performance
 
 Single AWS `t2.micro` instance, storing temporary files on `tmpfs` filesystem, can handle over 3000 individual checks without any performance issues, assuming that queries from monitoring system are done via http (no encryption), every 1 minute.
 
 Note that you can use different addresses for reporting data from monitored hosts, and for querying (in particular, you can use https for reporting and http for querying over internal network).
 
 
-# SMART monitoring details
+## SMART monitoring details
 
 Heartbeat automatically detects all local drives, even ones not supported by udev:
 - SATA drives connected straight, or via USB or eSATA (including with port multiplier), or even as passthrough from hypervisor to virtual machine
@@ -143,7 +143,7 @@ Drive temperature is not monitored, since SAS drives have Drive Trip Temperature
 - `number of hours powered up` - max 70000 (only for Seagate and Hitachi drives)
 
 
-# Free space monitoring details
+## Free space monitoring details
 
 `/opt/heartbeat/config/common-data-directories.list` file contains the list of directories commonly used to storage bigger amounts of data, eg. by databases, queues, (para)virtualization etc. This file is processed during Heartbeat setup and any directories from this list that actually exist on current host, are added to `/etc/heartbeat/detected-data-directories.conf` file. Next, they are checked every 2 minutes, if they have at least 12 GB of free disk space.
 
@@ -158,7 +158,7 @@ Such limits are designed to give system administrators just enough time to safel
 This example check will require `/var/lib` directory to have at least 480 GB of free space, or otherwise it will fail.
 
 
-# Implementing custom checks
+## Implementing custom checks
 
 You can implement custom checks just by adding them to `/etc/heartbeat/hooks/custom.sh` script. It just needs to print the list of passed checks on console, one per line. For example, the above check for `/var/lib` directory free space should just print:
 
@@ -175,7 +175,7 @@ Such script will print `my-symfony-app-console` if there will be at least 34 run
 `/opt/heartbeat/scripts/checks/custom/count-processes.sh "app/console rabbitmq:consumer" 31 rabbit-consumer`
 
 
-# Debugging
+## Debugging
 
 To see, what is reported to Heartbeat server, just run:
 
