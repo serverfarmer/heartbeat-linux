@@ -1,6 +1,6 @@
 ## Overview
 
-Heartbeat is a Server Farmer subproject, that extends functionally your chosen monitoring/alerting solution by providing abilities to monitor (as for Linux version):
+Heartbeat is a Server Farmer subproject, that extends functionally your chosen monitoring/alerting solution by providing abilities to monitor (as for Linux/FreeBSD version):
 - services listening on known ports
 - running Docker containers
 - running libvirt-based virtual machines
@@ -19,7 +19,7 @@ Heartbeat can work with any monitoring/alerting system, that supports http(s) ke
 Heartbeat can be installed in 2 modes: with or without Server Farmer.
 
 1. With Server Farmer it:
-- is installed automatically on all Linux-based hosts
+- is installed automatically on all Linux/FreeBSD-based hosts
 - installs `/etc/heartbeat/hooks/smart.sh` hook for Cacti and NewRelic (see below)
 - uses Heartbeat server address from `heartbeat_url` function (see below)
 
@@ -31,6 +31,8 @@ git clone https://github.com/serverfarmer/heartbeat-linux /opt/heartbeat
 ```
 
 Next, put your Heartbeat instance url into `/etc/heartbeat/server.url` file (unless you want to use the public instance, eg. for testing).
+
+On FreeBSD and various "minimal" Linux distributions, make sure that `bash`, `curl`, `flock`, `hdparm` and `smartmontools` packages are installed.
 
 
 ## How it works

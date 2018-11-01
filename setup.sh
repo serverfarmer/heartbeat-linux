@@ -9,6 +9,8 @@ if [ "`uname`" = "Linux" ] && ! grep -q /var/cache/heartbeat /etc/fstab; then
 fi
 
 
+/opt/heartbeat/scripts/setup/configure-symlinks.sh
+
 if [ ! -f /proc/1/environ ] || ! grep -q lxc /proc/1/environ; then
 	echo "setting up SMART configuration files and templates"
 	/opt/heartbeat/scripts/setup/configure-smart.sh
