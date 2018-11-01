@@ -1,6 +1,6 @@
 #!/bin/sh
 
-devices=`/opt/heartbeat/scripts/facts/storage/list-physical-drives.sh |grep -v SSD |grep -vxFf /etc/heartbeat/skip-smart.sata`
+devices=`/opt/heartbeat/scripts/facts/storage/list-udev-drives.sh |grep -v SSD |grep -vxFf /etc/heartbeat/skip-smart.sata`
 
 file=`mktemp -u /var/cache/heartbeat/usb.XXXXXXXXX.tmp`
 /opt/heartbeat/scripts/facts/storage/list-usb-drives.sh >$file

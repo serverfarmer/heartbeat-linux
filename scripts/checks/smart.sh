@@ -1,7 +1,7 @@
 #!/bin/bash
 
 path=`mktemp -d /var/cache/heartbeat/smart.XXXXXXXXX`
-devices=`/opt/heartbeat/scripts/facts/storage/list-physical-drives.sh |grep -vxFf /etc/heartbeat/skip-smart.sata`
+devices=`/opt/heartbeat/scripts/facts/storage/list-udev-drives.sh |grep -vxFf /etc/heartbeat/skip-smart.sata`
 
 for device in $devices; do
 	base="`basename $device`"
