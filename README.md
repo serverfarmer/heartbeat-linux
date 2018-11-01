@@ -45,9 +45,15 @@ Make sure that `bash`, `curl`, `flock` and `smartmontools` packages are installe
 
 #### NetBSD
 
-Make sure that `bash`, `netcat` and `smartmontools` packages are installed. On NetBSD earlier than 7, installing `smartmontools` will require changing `PKG_PATH` variable first, to point to release 7 repository, eg.
+1. Make sure that `bash`, `netcat`, `mozilla-rootcerts` and `smartmontools` packages are installed. On NetBSD earlier than 7, installing `smartmontools` will require changing `PKG_PATH` variable first, to point to release 7 repository, eg.
 
 `PKG_PATH=ftp://ftp.NetBSD.org/pub/pkgsrc/packages/NetBSD/amd64/7.0/All`
+
+2. After installing `mozilla-rootcerts` package, execute `mozilla-rootcerts install` as root to refresh CA root certificates.
+
+3. Execute `crontab -e` as root and add this line to crontab:
+
+`*/2 * * * * /opt/heartbeat/scripts/cron/update.sh`
 
 
 ## How it works
