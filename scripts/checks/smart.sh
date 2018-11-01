@@ -8,7 +8,7 @@ for device in $devices; do
 	file="$path/`echo $base |tr ':' '-'`.txt"
 	deviceid=${base:4}
 
-	/usr/sbin/smartctl -d sat -T permissive -a $device >$file.new
+	smartctl -d sat -T permissive -a $device >$file.new
 
 	if grep -q "No such device" $file.new || grep -q "Read Device Identity failed" $file.new; then
 		logger -p cron.notice -t heartbeat-smart "device $deviceid failed SMART data collection"
@@ -28,7 +28,7 @@ for entry in $raid; do
 	device=$(echo $entry |cut -d: -f4)
 
 	file="$path/$device.txt"
-	/usr/sbin/smartctl -d $handle -a $node >$file
+	smartctl -d $handle -a $node >$file
 	/opt/heartbeat/scripts/checks/smart-$type.sh ${device:4} $file
 done
 

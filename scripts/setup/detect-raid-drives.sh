@@ -5,7 +5,7 @@ scan_drive() {
 	type=$2
 	device=$3
 
-	/usr/sbin/smartctl -d $type -i $device >$file
+	smartctl -d $type -i $device >$file
 
 	if grep -q " SAS" $file; then
 		model=`grep 'Product:' $file |awk '{ print $2 $3 $4 $5 $6 $7 $8 $9 }'`
@@ -20,17 +20,11 @@ scan_drive() {
 
 
 file=`mktemp -u /var/cache/heartbeat/raid.XXXXXXXXX.tmp`
-drives=`/opt/heartbeat/scripts/facts/storage/list-megaraid-drives.sh`
+drives1=`/opt/heartbeat/scripts/facts/storage/list-megaraid-drives.sh`
+drives2=`/opt/heartbeat/scripts/facts/storage/list-scsi-generic-drives.sh`
+drives3=`/opt/heartbeat/scripts/facts/storage/list-freebsd-drives.sh`
 
-for drive in $drives; do
-	handle=$(echo $drive |cut -d: -f1)
-	device=$(echo $drive |cut -d: -f2)
-	scan_drive $file $handle $device
-done
-
-drives=`/opt/heartbeat/scripts/facts/storage/list-scsi-generic-drives.sh`
-
-for drive in $drives; do
+for drive in $drives1 $drives2 $drives3; do
 	type=$(echo $drive |cut -d: -f1)
 	device=$(echo $drive |cut -d: -f2)
 	scan_drive $file $type $device
