@@ -1,6 +1,6 @@
 ## Overview
 
-Heartbeat is a Server Farmer subproject, that extends functionally your chosen monitoring/alerting solution by providing abilities to monitor (as for Linux/FreeBSD version):
+Heartbeat is a Server Farmer subproject, that extends functionally your chosen monitoring/alerting solution by providing abilities to monitor:
 - services listening on known ports
 - running Docker containers
 - running libvirt-based virtual machines
@@ -12,6 +12,11 @@ Heartbeat is a Server Farmer subproject, that extends functionally your chosen m
 Heartbeat can work with any monitoring/alerting system, that supports http(s) keyword monitoring, including:
 - public: StatusCake, Uptimerobot, Pingdom etc.
 - local: Nagios, Icinga, Zabbix, PRTG etc.
+
+This versions is compatible with:
+- Linux (all distributions, possibly except some minimal ones)
+- FreeBSD 9.x or later
+- NetBSD 6.x or later
 
 
 ## Installation
@@ -32,7 +37,17 @@ git clone https://github.com/serverfarmer/heartbeat-linux /opt/heartbeat
 
 Next, put your Heartbeat instance url into `/etc/heartbeat/server.url` file (unless you want to use the public instance, eg. for testing).
 
-On FreeBSD and various "minimal" Linux distributions, make sure that `bash`, `curl`, `flock`, `hdparm` and `smartmontools` packages are installed.
+### OS specific notes
+
+#### FreeBSD
+
+Make sure that `bash`, `curl`, `flock` and `smartmontools` packages are installed.
+
+#### NetBSD
+
+Make sure that `bash`, `netcat` and `smartmontools` packages are installed. On NetBSD earlier than 7, installing `smartmontools` will require changing `PKG_PATH` variable first, to point to release 7 repository, eg.
+
+`PKG_PATH=ftp://ftp.NetBSD.org/pub/pkgsrc/packages/NetBSD/amd64/7.0/All`
 
 
 ## How it works

@@ -22,7 +22,7 @@ scan_drive() {
 file=`mktemp -u /var/cache/heartbeat/raid.XXXXXXXXX.tmp`
 drives1=`/opt/heartbeat/scripts/facts/storage/list-megaraid-drives.sh`
 drives2=`/opt/heartbeat/scripts/facts/storage/list-scsi-generic-drives.sh`
-drives3=`/opt/heartbeat/scripts/facts/storage/list-freebsd-drives.sh`
+drives3=`/opt/heartbeat/scripts/facts/storage/list-bsd-drives.sh`
 
 for drive in $drives1 $drives2 $drives3; do
 	type=$(echo $drive |cut -d: -f1)
