@@ -14,7 +14,7 @@ scan_drive() {
 	elif ! grep -q "INQUIRY failed" $file; then
 		model=`grep 'Device Model:' $file |awk '{ print $3 $4 $5 $6 $7 $8 $9 }'`
 		serial=`grep 'Serial Number:' $file |awk '{ print $3 }'`
-		echo sata:$device:$type:ata-${model}_${serial}
+		echo sata:$device:$type:ata-${model}_${serial} |grep -v VBOX |grep -v QEMU |grep -v VMware
 	fi
 }
 
