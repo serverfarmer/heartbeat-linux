@@ -33,10 +33,12 @@ for entry in $raid; do
 done
 
 
-if [ -x /etc/heartbeat/hooks/smart.sh ]; then
-	for file in `ls $path/*.txt 2>/dev/null`; do
-		/etc/heartbeat/hooks/smart.sh $file
-	done
-fi
+if [ "$1" != "--debug" ]; then
+	if [ -x /etc/heartbeat/hooks/smart.sh ]; then
+		for file in `ls $path/*.txt 2>/dev/null`; do
+			/etc/heartbeat/hooks/smart.sh $file
+		done
+	fi
 
-rm -rf $path
+	rm -rf $path
+fi

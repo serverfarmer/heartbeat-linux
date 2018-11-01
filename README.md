@@ -181,7 +181,7 @@ Such script will print `my-symfony-app-console` if there will be at least 34 run
 
 To see, what is reported to Heartbeat server, just run:
 
-- `/opt/heartbeat/scripts/checks/all.sh` - to see the list of reported checks
+- `/opt/heartbeat/scripts/checks/all.sh` - to see the list of reported checks (running it with `--debug` argument will disable SMART hook script and removing temporary files with SMART dumps)
 - `/opt/heartbeat/scripts/facts/get-reported-hostname.sh` - to see the hostname used for reporting
 
 If you added/removed drives or directories to monitor free space, run `/opt/heartbeat/setup.sh` to scan system for changes.
