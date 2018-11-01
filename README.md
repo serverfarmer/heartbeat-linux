@@ -1,12 +1,12 @@
 ## Overview
 
-Heartbeat is a Server Farmer subproject, that extends functionally of your chosen monitoring/alerting solution by providing abilities to monitor (as for Linux version):
+Heartbeat is a Server Farmer subproject, that extends functionally your chosen monitoring/alerting solution by providing abilities to monitor (as for Linux version):
 - services listening on known ports
 - running Docker containers
 - running libvirt-based virtual machines
 - SMART for local drives (also SAS and all drives connected through hardware RAID controllers)
 - free space under critical directories (eg. `/var/lib/mysql` - directories are detected automatically, see below)
-- mounted LUKS encrypted drives (or just any device mapped based)
+- mounted LUKS encrypted drives (or just any device mapper based)
 - custom conditions defined per monitored host
 
 Heartbeat can work with any monitoring/alerting system, that supports http(s) keyword monitoring, including:
