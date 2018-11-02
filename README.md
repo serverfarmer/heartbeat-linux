@@ -16,6 +16,7 @@ Heartbeat can work with any monitoring/alerting system, that supports http(s) ke
 This versions is compatible with:
 - Linux (all distributions, possibly except some minimal ones)
 - FreeBSD 9.x or later
+- OpenBSD 5.x or later
 - NetBSD 6.x or later
 
 
@@ -39,7 +40,7 @@ Next, put your Heartbeat instance url into `/etc/heartbeat/server.url` file (unl
 
 ### OS specific notes
 
-#### FreeBSD
+#### FreeBSD, OpenBSD
 
 Make sure that `bash`, `curl`, `flock` and `smartmontools` packages are installed.
 

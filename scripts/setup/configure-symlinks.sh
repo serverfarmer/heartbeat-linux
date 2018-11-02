@@ -2,7 +2,7 @@
 
 symlink_if_not_exists() {
 	src=$1
-	dst=$1
+	dst=$2
 
 	if [ ! -x $dst ] && [ -x $src ]; then
 		echo "creating symbolic link from $src to $dst"
@@ -11,7 +11,7 @@ symlink_if_not_exists() {
 }
 
 
-# FreeBSD
+# FreeBSD, OpenBSD
 # assume that packages are already installed (bash, curl, flock, smartmontools)
 symlink_if_not_exists /usr/local/bin/bash /bin/bash
 symlink_if_not_exists /usr/local/bin/curl /usr/bin/curl
