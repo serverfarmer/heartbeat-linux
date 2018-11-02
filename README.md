@@ -212,6 +212,20 @@ If you added/removed drives or directories to monitor free space, run `/opt/hear
 
 All Heartbeat settings are stored in `/etc/heartbeat` directory, and temporary files in `/var/cache/heartbeat` (which should be mounted as `tmpfs`).
 
+#### Common problems
+
+##### `/opt/heartbeat/scripts/checks/all.sh` script shows many errors, when run manually
+
+Make sure that you have installed all required system packages. See [notes](#os-specific-notes) above.
+
+##### `/opt/heartbeat/scripts/cron/update.sh` script is added to `/etc/crontab`, but doesn't run
+
+Add it to root crontab manually using `crontab -e` command. See [notes](#os-specific-notes) above.
+
+##### `/opt/heartbeat/scripts/cron/update.sh` script runs, but can't contact Heartbeat server
+
+Make sure that your CA root certificates are up to date (this is the most common problem on old systems).
+
 
 ## How to contribute
 
