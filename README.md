@@ -42,9 +42,9 @@ Next, put your Heartbeat instance url into `/etc/heartbeat/server.url` file (unl
 
 #### FreeBSD, OpenBSD
 
-Make sure that `bash`, `curl`, `flock` and `smartmontools` packages are installed.
+Make sure that `bash`, `curl`, `flock` and `smartmontools` packages are installed. Update CA root certificates if needed.
 
-#### NetBSD, Slackware
+#### NetBSD, OpenBSD, Slackware
 
 Execute `crontab -e` as root and add this line to crontab:
 
