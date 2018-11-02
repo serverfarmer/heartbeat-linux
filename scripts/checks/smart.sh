@@ -1,6 +1,6 @@
 #!/bin/bash
 
-path=`mktemp -d /var/cache/heartbeat/smart.XXXXXXXXX`
+path=`mktemp -d /var/cache/heartbeat/smart.XXXXXX`
 devices=`/opt/heartbeat/scripts/facts/storage/list-udev-drives.sh |grep -vxFf /etc/heartbeat/skip-smart.sata`
 
 for device in $devices; do

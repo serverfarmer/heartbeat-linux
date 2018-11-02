@@ -7,7 +7,7 @@ fi
 check_service() {
 	port=$1
 	svc=$2
-	if nc -z 127.0.0.1 $port >/dev/null; then
+	if nc -z 127.0.0.1 $port >/dev/null 2>/dev/null; then
 		echo $svc
 	fi
 }

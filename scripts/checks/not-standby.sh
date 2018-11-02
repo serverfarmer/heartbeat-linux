@@ -2,7 +2,7 @@
 
 devices=`/opt/heartbeat/scripts/facts/storage/list-udev-drives.sh |grep -v SSD |grep -vxFf /etc/heartbeat/skip-smart.sata`
 
-file=`mktemp -u /var/cache/heartbeat/usb.XXXXXXXXX.tmp`
+file=`mktemp -u /var/cache/heartbeat/usb.XXXXXX`
 /opt/heartbeat/scripts/facts/storage/list-udev-usb-drives.sh >$file
 
 for device in $devices; do
