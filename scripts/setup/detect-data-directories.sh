@@ -14,7 +14,7 @@ fi
 
 if [ -x /usr/bin/psql ]; then
 	cd /tmp
-	echo 'show data_directory' |sudo -u postgres psql 2>/dev/null |grep -A1 -- '--------' |tail -n1 |sed s/\ //g
+	echo 'show data_directory' |sudo -u postgres psql 2>/dev/null |tr ' ' '\n' |tr '|' '\n' |grep -v ^$ |grep -v -- ------- |grep -A1 -- data_directory |tail -n1
 	echo
 fi
 
