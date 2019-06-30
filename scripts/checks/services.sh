@@ -28,6 +28,8 @@ check_service 27017 mongodb
 check_service 80 http
 check_service 443 https
 check_service 3128 squid
+check_service 6081 varnish
+check_service 6082 varnish-admin
 check_service 3000 app3000
 check_service 3001 app3001
 check_service 3002 app3002
@@ -55,6 +57,7 @@ check_service 953 rdnc
 check_service 1194 openvpn
 check_service 2812 monit
 check_service 3260 iscsi
+check_service 3310 clamd
 
 # https://developer.couchbase.com/documentation/server/current/install/install-ports.html
 check_service 4369 cb-epmd
