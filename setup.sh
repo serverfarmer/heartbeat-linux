@@ -2,13 +2,15 @@
 
 mkdir -p /var/cache/heartbeat /etc/heartbeat
 
-if [ "`uname`" = "Linux" ] && ! grep -q /var/cache/heartbeat /etc/fstab; then
+if [ "`uname`" = "Linux" ] \
+	&& ! grep -q lxc /proc/1/environ \
+	&& ! grep -q /var/cache/heartbeat /etc/fstab; then
 	echo "setting up cache directory"
 	echo "tmpfs /var/cache/heartbeat tmpfs noatime,size=16m 0 0" >>/etc/fstab
 	mount /var/cache/heartbeat
 fi
 
-
+/opt/heartbeat/scripts/setup/configure-hostname.sh
 /opt/heartbeat/scripts/setup/configure-symlinks.sh
 
 if [ ! -f /proc/1/environ ] || ! grep -q lxc /proc/1/environ; then
