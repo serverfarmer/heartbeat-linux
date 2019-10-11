@@ -17,6 +17,7 @@ check_service 1583 pervasive
 check_service 3050 firebird
 check_service 3306 mysql
 check_service 5432 postgres
+check_service 5984 couchdb
 check_service 6379 redis
 check_service 8086 influxd-http
 check_service 8088 influxd-rpc
