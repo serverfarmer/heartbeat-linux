@@ -27,7 +27,7 @@ Heartbeat can be installed in 2 modes: with or without Server Farmer.
 1. With Server Farmer it:
 - is installed automatically on all Linux/FreeBSD-based hosts
 - installs `/etc/heartbeat/hooks/smart.sh` hook for Cacti and NewRelic (see below)
-- uses Heartbeat server address from `heartbeat_url` function (see below)
+- uses Heartbeat server address from `/opt/farm/config/get-url-heartbeat.sh` script (see below)
 
 2. Manual installation without Server Farmer:
 
@@ -70,7 +70,7 @@ After installing (and each upgrade of) `mozilla-rootcerts` package, execute `moz
 ##### Heartbeat server address detection:
 
 1. Cron job looks for `/etc/heartbeat/server.url` file - if it exists, it should contain the full path to Heartbeat server.
-2. If Server Farmer is also installed, cron job loads `/opt/farm/scripts/functions.custom` file and uses server address returned by `heartbeat_url` function. So if you cloned Server Farmer main repository and changed mentioned function to point to your private instance, it will be automatically detected here.
+2. If Server Farmer is also installed, cron job uses server address returned by `/opt/farm/config/get-url-heartbeat.sh` script. So if you cloned Server Farmer main repository and changed mentioned script to point to your private instance, it will be automatically detected here.
 3. Otherwise it uses hardcoded `https://serverfarmer.home.pl/heartbeat/` (public Heartbeat instance).
 
 #### Remote part:

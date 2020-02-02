@@ -10,9 +10,8 @@ services=`/opt/heartbeat/scripts/checks/all.sh |tr '\n' ','`
 if [ -s /etc/heartbeat/server.url ]; then
 	url=`cat /etc/heartbeat/server.url`
 
-elif [ -s /opt/farm/scripts/functions.custom ]; then
-	. /opt/farm/scripts/functions.custom
-	url=`heartbeat_url`
+elif [ -x /opt/farm/config/get-url-heartbeat.sh ]; then
+	url=`/opt/farm/config/get-url-heartbeat.sh`
 
 else
 	url="https://serverfarmer.home.pl/heartbeat/"
