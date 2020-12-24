@@ -5,7 +5,7 @@ scan_drive() {
 	type=$2
 	device=$3
 
-	smartctl -d $type -i $device >$file
+	smartctl -d $type -T permissive -i $device >$file
 
 	if grep -q " SAS" $file; then
 		model=`grep 'Product:' $file |awk '{ print $2 $3 $4 $5 $6 $7 $8 $9 }'`
@@ -14,7 +14,7 @@ scan_drive() {
 	elif ! grep -q "INQUIRY failed" $file; then
 		model=`grep 'Device Model:' $file |awk '{ print $3 $4 $5 $6 $7 $8 $9 }'`
 		serial=`grep 'Serial Number:' $file |awk '{ print $3 }'`
-		if [ ! -h /dev/disk/by-id/ata-${model}_${serial} ]; then
+		if [ "$model" != "" ] && [ "$model" != "[NoInformationFound]" ] && [ ! -h /dev/disk/by-id/ata-${model}_${serial} ]; then
 			echo sata:$device:$type:ata-${model}_${serial} |grep -v VBOX |grep -v QEMU |grep -v VMware
 		fi
 	fi
