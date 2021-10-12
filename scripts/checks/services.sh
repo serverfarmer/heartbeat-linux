@@ -17,13 +17,17 @@ check_service 1583 pervasive
 check_service 3050 firebird
 check_service 3306 mysql
 check_service 5432 postgres
+check_service 5601 kibana
 check_service 5984 couchdb
 check_service 6379 redis
 check_service 8086 influxd-http
 check_service 8088 influxd-rpc
+check_service 9092 kafka
 check_service 9200 elasticsearch
 check_service 9300 elasticcluster
 check_service 11211 memcached
+check_service 21000 atlas-admin
+check_service 21443 atlas
 check_service 27017 mongodb
 
 check_service 80 http
@@ -56,9 +60,12 @@ check_service 389 ldap
 check_service 631 ipp
 check_service 953 rdnc
 check_service 1194 openvpn
+check_service 2181 zookeeper
 check_service 2812 monit
 check_service 3260 iscsi
 check_service 3310 clamd
+check_service 10050 zabbix-agent
+check_service 10051 zabbix-server
 
 # https://developer.couchbase.com/documentation/server/current/install/install-ports.html
 check_service 4369 cb-epmd
