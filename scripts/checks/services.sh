@@ -22,6 +22,8 @@ check_service 5984 couchdb
 check_service 6379 redis
 check_service 8086 influxd-http
 check_service 8088 influxd-rpc
+check_service 7199 cassandra-jmx
+check_service 9042 cassandra-cql
 check_service 9092 kafka
 check_service 9200 elasticsearch
 check_service 9300 elasticcluster
