@@ -18,7 +18,7 @@ if [ -x /usr/bin/psql ]; then
 	echo
 fi
 
-for dir in `cat /opt/heartbeat/config/common-data-directories.list |grep -v ^#`; do
+for dir in `grep -v ^# /opt/heartbeat/config/common-data-directories.list`; do
 	if [ -d $dir ] && [ ! -h $dir ] && [ "`ls -A $dir`" != "" ]; then
 		echo $dir
 	fi
