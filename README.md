@@ -108,6 +108,7 @@ Note that you can use different addresses for reporting data from monitored host
 
 Heartbeat automatically detects all local drives, even ones not supported by udev:
 - SATA drives connected straight, or via USB or eSATA (including with port multiplier), or even as passthrough from hypervisor to virtual machine
+- NVMe drives connected straight, or via USB (note: not all USB bridge chipsets are supported)
 - SATA/SAS drives connected to MegaRAID controller
 - SATA/SAS drives connected to any custom hardware controller, assuming that such drives are exposed via `/dev/sg*` interfaces
 
@@ -124,7 +125,7 @@ Version provided by Server Farmer:
 
 In highly professional use, drives mostly work in stable physical conditions for all their lifetime. This is often not the case for smaller companies or private use, where physical conditions (eg. temperature, cables etc.) can change from time to time.
 
-Because of that, some particular SMART errors can happen and shouldn't be considered a problem. For example,  non-zero `UDMA_CRC_Error_Count` is often a result of bad eSATA cable/connector, and it stays non-zero even after the cable is replaced. And there are numerous similar exceptions, where certain defects doesn't yet mean that drive should be replaced.
+Because of that, some particular SMART errors can happen and shouldn't be considered a problem. For example, non-zero `UDMA_CRC_Error_Count` is often a result of bad eSATA cable/connector, and it stays non-zero even after the cable is replaced. And there are numerous similar exceptions, where certain defects doesn't yet mean that drive should be replaced.
 
 In file `/etc/heartbeat/known-smart-defects.conf` you can store such exceptions, eg.:
 
@@ -140,6 +141,7 @@ There are certain cases, where you want to exclude particular drives from being 
 - USB drives in external enclosures, meant to be either disconnected or put in `standby` condition for most of the time, that might overheat otherwise
 
 You can add such drives to these files to exclude them from being detected:
+- `/etc/heartbeat/skip-smart.nvme` (drives recognized and handled by udev)
 - `/etc/heartbeat/skip-smart.sata` (drives recognized and handled by udev)
 - `/etc/heartbeat/skip-smart.raid` (drives connected to hardware RAID controllers)
 
@@ -156,6 +158,13 @@ You can add such drives to these files to exclude them from being detected:
 - `Offline_Uncorrectable` - 0
 - `Calibration_Retry_Count` - 0
 - `Power_On_Hours` - max 70000 (which is around 8 years)
+
+##### Required SMART conditions for NVMe drives
+
+- `temperature` - max 65 degrees
+- `critical_warning` - 0
+- `media_errors` - max 10
+- `power_on_hours` - max 25000 (which is around 2.5 years)
 
 ##### Required SMART conditions for SAS drives
 
@@ -243,7 +252,7 @@ If you want to contribute:
 |                      |                                          |
 |:---------------------|:-----------------------------------------|
 | **Author:**          | Tomasz Klim (<opensource@tomaszklim.pl>) |
-| **Copyright:**       | Copyright 2016-2021 Tomasz Klim          |
+| **Copyright:**       | Copyright 2016-2023 Tomasz Klim          |
 | **License:**         | MIT                                      |
 
 Permission is hereby granted, free of charge, to any person obtaining a copy

@@ -19,6 +19,17 @@ for device in $devices; do
 done
 
 
+nvmes=`/opt/heartbeat/scripts/facts/storage/list-nvme-drives.sh |grep -vxFf /etc/heartbeat/skip-smart.nvme`
+
+for device in $nvmes; do
+	base="`basename $device`"
+	file="$path/`echo $base |tr ':' '-'`.txt"
+
+	nvme --smart-log $device >$file
+	/opt/heartbeat/scripts/checks/smart-nvme.sh ${base:5} $file
+done
+
+
 raid=`cat /etc/heartbeat/detected-raid-drives.conf |grep -vFf /etc/heartbeat/skip-smart.raid`
 
 for entry in $raid; do

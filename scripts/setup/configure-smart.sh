@@ -6,6 +6,12 @@ if [ ! -f /etc/heartbeat/skip-smart.sata ]; then
 " >/etc/heartbeat/skip-smart.sata
 fi
 
+if [ ! -f /etc/heartbeat/skip-smart.nvme ]; then
+	echo "# devices to skip should be added in the below format:
+# /dev/disk/by-id/nvme-Samsung_SSD_990_PRO_with_Heatsink_4TB_S1DSNJ2WA345678
+" >/etc/heartbeat/skip-smart.nvme
+fi
+
 if [ ! -f /etc/heartbeat/skip-smart.raid ]; then
 	echo "# devices to skip should be added in the below format:
 # sas-ST3600057SS_6SLXXXXX
