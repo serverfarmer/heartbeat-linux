@@ -7,6 +7,7 @@ Heartbeat is a Server Farmer subproject, that extends functionally your chosen m
 - SMART for local drives (also SAS and all drives connected through hardware RAID controllers)
 - free space under critical directories (eg. `/var/lib/mysql` - directories are detected automatically, see below)
 - mounted LUKS encrypted drives (or just any device mapper based)
+- MySQL database replication status (master-slave only)
 - custom conditions defined per monitored host
 
 Heartbeat can work with any monitoring/alerting system, that supports http(s) keyword monitoring, including:
