@@ -9,7 +9,7 @@ reasons=""
 lookup_nvme_attribute() {
 	name=$1
 	reference=$2
-	value=`grep "$name" $file |head -n1 |cut -d':' -f2 |awk '{ print $1 }' |sed s/0x//g`
+	value=`grep "$name" $file |head -n1 |cut -d':' -f2 |tr -d ',' |awk '{ print $1 }' |sed s/0x//g`
 
 	if [ "$value" != "" ] && [ $value -gt $reference ]; then
 		increase=`grep ^$deviceid: /etc/heartbeat/known-smart-defects.conf |grep ":$name:" |cut -d: -f3 |sed 's/[^0-9]*//g'`
