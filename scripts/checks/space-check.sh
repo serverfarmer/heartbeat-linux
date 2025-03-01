@@ -14,5 +14,5 @@ fi
 space=`df -k $directory |tail -n1 |awk '{ print $4 }'`
 
 if [[ $space -gt $require ]]; then
-	echo "space$label" |tr '/' '-'
+	echo "space$label" |tr '/' '-' |tr '_' '-'
 fi
